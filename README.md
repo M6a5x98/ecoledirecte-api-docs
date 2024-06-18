@@ -5,7 +5,7 @@
 >
 > À la date où cette documentation a été modifié, Aplim (la société créatrice d'EcoleDirecte) a ajouté une nouvelle fonctionnalité de QCM afin de pouvoir sécuriser les comptes EcoleDirecte de tentative de piratage.
 >
-> L'implémentation de ce système est décrite [ici](#-concernant-la-connexion-qcm).
+> L'implémentation de ce système est décrite [ici](#connexion-qcm).
 
 ## Introduction
 
@@ -30,6 +30,7 @@ Juste un rapide sommaire pour naviguer plus facilement dans la documentation.
   - [Servers.json](#serversjson)
 
 * [Login](#login)
+  * [Connexion QCM](#connexion-qcm)
   * [Account objects](#accounts-objects)
   * [Modules](#account-modules)
 * [Élève](#élève)
@@ -261,8 +262,9 @@ Différents exemples de réponses complètes. Elles suivent le modèle de répon
 ```
 </details>
 
+### Connexion QCM
+
 > [!WARNING]
-> ⚠ Concernant la connexion (QCM)
 > Si vous obtenez un code 250 concernant la connexion, vous devez implémenter la méthode suivante :<br>
 
 > [!NOTE] 
