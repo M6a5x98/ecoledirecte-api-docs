@@ -1381,7 +1381,7 @@ type Workspace = {
 
 <br/>
 
-__POST__ /v3/E/{id}/espacestravail/{espace.id}/acces.awp
+__POST__ `/v3/E/{id}/espacestravail/{espace.id}/acces.awp`
 
 Permet de joindre un espace de travail.
 
@@ -1400,7 +1400,7 @@ Omit<Workspace, "type" | "creeLe"> & {
 
 <br/>
 
-__DELETE__ /v3/E/{id}/espacestravail/{espace.id}/acces.awp
+__DELETE__ `/v3/E/{id}/espacestravail/{espace.id}/acces.awp`
 
 Permet de quitter un espace de travail.
 
