@@ -841,7 +841,7 @@ Pas de visios ici non plus donc réponse inconnue.
 Le titre est plutot clair non ?
 
 > [!NOTE]
-> Si jamais le temps est incorrect alors data sera juste un array vide\*
+> Si jamais le temps est incorrect alors data sera juste un array vide
 
 **GET** `/v3/E/{id}/emploidutemps.awp`
 
@@ -940,75 +940,143 @@ Data dans la réponse :
 {
     "classeurs": [
       {
-        "id": int, //Id du classeur
+        "id": number, //Id du classeur
        "libelle": string //Nom du classeur
        }],
     "messages": {
       "received": [
         {
-          "id": int, //Id du message
-          "responseId": int, //Id de la réponse. Si il y en a pas 0
-          "forwardId": int, //Id du transfert. Si il y en a pas 0
-          "mtype": string, //Type de message
+          "id": number, //Id du message
+          "responseId": number, //Id de la réponse. Si il y en a pas 0
+          "forwardId": number, //Id du transfert. Si il y en a pas 0
+          "mtype": number, //Type de message
           "read": boolean, //Lu ?
           "idDossier": -1, //??
           "idClasseur": 0, //Id du classeur
-          "transferred": boolean, //Est-ce que le message est un message treansféré
+          "transferred": boolean, //Est-ce que le message est un message transféré
           "answered": boolean, //Est-ce que le message a une réponse
           "to_cc_cci": string, //??
           "brouillon": boolean, //Est-ce que le message est un brouillon
           "canAnswer": boolean, //Est-ce que on peut répondre au message
           "subject": string, //L'objet du message
           "content": "",
-          "date": "2024-06-08 09:58:49",
-          "to": [],
-          "files": [],
+          "date": string, //la date au format YYYY-MM-DD hh:mm:ss
+          "to": [], //??
+          "files": Array<{
+            "id": number, //Id de la pièce jointe
+		        "libelle": string, //Nom d'affichage de la pièce jointe
+		        "date": string, //La date au format YYYY-MM-DD
+		        "type": "PIECE_JOINTE",
+		        "signatureDemandee": boolean,
+		        "etatSignatures": [],
+		        "signature": {}
+        }>,//Pièces jointes
           "from": { //Infos sur la personne qui a envoyé ce message
-            "name": string, //Nom complet
-            "nom": string, //Nom
-            "prenom": string, //Prénom
-            "particule": "", //Particule de la personne qui a envoyé ce message
-            "civilite": "", //Civilité de la personne qui a envoyé ce message
-            "role": "E",//Prénom de la personne qui a envoyé ce message
-            "listeRouge": false,
-            "id": 3612,
-            "read": true,
-            "fonctionPersonnel": "5eme H"
+            "name": string, //Nom complet de la personne qui a envoyé ce message
+            "nom": string, //Nom de la personne qui a envoyé ce message
+            "prenom": string, //Prénom de la personne qui a envoyé ce message
+            "particule": string, //Particule de la personne qui a envoyé ce message
+            "civilite": string, //Civilité de la personne qui a envoyé ce message
+            "role": string,//Rôle de la personne qui a envoyé ce message (E:élève,P:prof)
+            "listeRouge": boolean, //??
+            "id": number, //Id de la personne qui a envoyé ce message
+            "read": boolean, //A lu
+            "fonctionPersonnel": string //Classe ?
           }
         }
       ],
-      "sent": [],
-      "draft": [],
-      "archived": []
+      "sent": [], //??
+      "draft": [], //??
+      "archived": [] //??
     },
-    "parametrage": {
-      "isActif": true,
-      "canParentsLireMessagesEnfants": true,
-      "destAdmin": true,
-      "destEleve": false,
-      "destFamille": false,
-      "destProf": true,
-      "destEspTravail": true,
-      "disabledNotification": false,
-      "notificationEmailEtablissement": true,
-      "choixMailNotification": 2,
-      "autreMailNotification": "",
-      "mailPro": "",
-      "mailPerso": "",
+    "parametrage": { //Quelques clés sont transparentes sinon le reste est peu comprehensible
+      "isActif": boolean,
+      "canParentsLireMessagesEnfants": boolean,
+      "destAdmin": boolean,
+      "destEleve": boolean,
+      "destFamille": boolean,
+      "destProf": boolean,
+      "destEspTravail": boolean,
+      "disabledNotification": boolean,
+      "notificationEmailEtablissement": boolean,
+      "choixMailNotification": number,
+      "autreMailNotification": string,
+      "mailPro": string,
+      "mailPerso": string,
       "messagerieApiVersion": "v3",
-      "blackListProfActive": false,
-      "estEnBlackList": false,
-      "afficherToutesLesClasses": false
+      "blackListProfActive": boolean,
+      "estEnBlackList": boolean,
+      "afficherToutesLesClasses": boolean
     },
     "pagination": {
-      "messagesRecusCount": 22,
-      "messagesEnvoyesCount": 19,
-      "messagesArchivesCount": 0,
-      "messagesRecusNotReadCount": 0,
-      "messagesDraftCount": 0
+      "messagesRecusCount": number, //Nombre de messages reçus
+      "messagesEnvoyesCount": number, //Nombre de messages envoyés
+      "messagesArchivesCount": number, //Nombre de messages archivés
+      "messagesRecusNotReadCount": number, //Nombre de messages reçus mais non lus
+      "messagesDraftCount": number //Nombre de messages brouillons
     }
   }
 
+```
+
+**GET** `/v3/eleves/{id}/messages/{messageId}.awp`
+
+Renvoie un message
+
+Data en body :
+
+```typescript
+{
+  anneeMessages: "YYYY-YYYY"; //Année du messages
+}
+```
+
+Paramètre obligatoire à passer dans l'url
+
+**`mode`** : _`destinataire`_
+
+Data dans la réponse :
+
+```typescript
+{
+  "id": number, //Id du message
+  "responseId": number, //Id de la réponse. Si il y en a pas 0
+  "forwardId": number, //Id du transfert. Si il y en a pas 0
+  "mtype": number, //Type de message
+  "read": boolean, //Lu ?
+  "idDossier": -1, //??
+  "idClasseur": 0, //Id du classeur
+  "transferred": boolean, //Est-ce que le message est un messtransféré
+  "answered": boolean, //Est-ce que le message a une réponse
+  "to_cc_cci": string, //??
+  "brouillon": boolean, //Est-ce que le message est un brouillon
+  "canAnswer": boolean, //Est-ce que on peut répondre au message
+  "subject": string, //L'objet du message
+  "content": string, //Contenu du message en HTML encodé en base 64
+  "date": string, //la date au format YYYY-MM-DD hh:mm:ss
+  "to": [], //??
+  "files": Array<{
+    "id": number, //Id de la pièce jointe
+		"libelle": string, //Nom d'affichage de la pièce jointe
+		"date": string, //La date au format YYYY-MM-DD
+		"type": "PIECE_JOINTE",
+		"signatureDemandee": boolean,
+		"etatSignatures": [],
+		"signature": {}
+}>,//Pièces jointes
+  "from": { //Infos sur la personne qui a envoyé ce message
+    "name": string, //Nom complet de la personne qui a envoyé ce message
+    "nom": string, //Nom de la personne qui a envoyé ce message
+    "prenom": string, //Prénom de la personne qui a envoyé ce message
+    "particule": string, //Particule de la personne qui a envoyé ce message
+    "civilite": string, //Civilité de la personne qui a envoyé ce message
+    "role": string,//Rôle de la personne qui a envoyé ce message (E:élève,P:prof)
+    "listeRouge": boolean, //??
+    "id": number, //Id de la personne qui a envoyé ce message
+    "read": boolean, //A lu
+    "fonctionPersonnel": string //Classe ?
+  }
+ }
 ```
 
 ### Cahier de texte
