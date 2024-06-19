@@ -932,17 +932,83 @@ Paramètres à passer dans l'url
 
 **`typeRecuperation`** : _`received`_ (reçus) _`sent`_ (envoyés) _`draft`_ (brouillons) _`archived`_ (archivés) _`classeur`_ (dans un dossier)
 
-**`idClasseur`** : à 0 tout le temps sauf si on veut les messages dans un dossier. Dans ce cas, c'est l'Id du "classeur"
+**`idClasseur`** : à 0 tout le temps sauf si on veut les messages dans un dossier. Dans ce cas, c'est l'Id du classeur fourni dans la liste `classeurs`
 
 Data dans la réponse :
 
 ```typescript
-"classeurs": [ // Dossiers de la messagerie
-     {
-          "id": int,
-          "libelle": string //Nom du dossier
-     }
-]
+{
+    "classeurs": [
+      {
+        "id": int, //Id du classeur
+       "libelle": string //Nom du classeur
+       }],
+    "messages": {
+      "received": [
+        {
+          "id": int, //Id du message
+          "responseId": int, //Id de la réponse. Si il y en a pas 0
+          "forwardId": int, //Id du transfert. Si il y en a pas 0
+          "mtype": string, //Type de message
+          "read": boolean, //Lu ?
+          "idDossier": -1, //??
+          "idClasseur": 0, //Id du classeur
+          "transferred": boolean, //Est-ce que le message est un message treansféré
+          "answered": boolean, //Est-ce que le message a une réponse
+          "to_cc_cci": string, //??
+          "brouillon": boolean, //Est-ce que le message est un brouillon
+          "canAnswer": boolean, //Est-ce que on peut répondre au message
+          "subject": string, //L'objet du message
+          "content": "",
+          "date": "2024-06-08 09:58:49",
+          "to": [],
+          "files": [],
+          "from": { //Infos sur la personne qui a envoyé ce message
+            "name": string, //Nom complet
+            "nom": string, //Nom
+            "prenom": string, //Prénom
+            "particule": "", //Particule de la personne qui a envoyé ce message
+            "civilite": "", //Civilité de la personne qui a envoyé ce message
+            "role": "E",//Prénom de la personne qui a envoyé ce message
+            "listeRouge": false,
+            "id": 3612,
+            "read": true,
+            "fonctionPersonnel": "5eme H"
+          }
+        }
+      ],
+      "sent": [],
+      "draft": [],
+      "archived": []
+    },
+    "parametrage": {
+      "isActif": true,
+      "canParentsLireMessagesEnfants": true,
+      "destAdmin": true,
+      "destEleve": false,
+      "destFamille": false,
+      "destProf": true,
+      "destEspTravail": true,
+      "disabledNotification": false,
+      "notificationEmailEtablissement": true,
+      "choixMailNotification": 2,
+      "autreMailNotification": "",
+      "mailPro": "",
+      "mailPerso": "",
+      "messagerieApiVersion": "v3",
+      "blackListProfActive": false,
+      "estEnBlackList": false,
+      "afficherToutesLesClasses": false
+    },
+    "pagination": {
+      "messagesRecusCount": 22,
+      "messagesEnvoyesCount": 19,
+      "messagesArchivesCount": 0,
+      "messagesRecusNotReadCount": 0,
+      "messagesDraftCount": 0
+    }
+  }
+
 ```
 
 ### Cahier de texte
