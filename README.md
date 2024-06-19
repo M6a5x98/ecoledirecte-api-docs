@@ -9,7 +9,6 @@
 
 ## Introduction
 
-
 Bienvenue sur la documentation non officielle de l'api d'ecoledirecte.
 
 Si jamais cette documentation vient a être défaillante, merci de faire une issue avec les problèmes rencontrés
@@ -17,9 +16,7 @@ Si jamais cette documentation vient a être défaillante, merci de faire une iss
 > [!NOTE]
 > (Si jamais vous avez des idées de formatage, hésitez pas à me le faire savoir [kekaaafm sur Discord](https://discord.gg/EHM7jubSvE))
 
-
 ## Index
-
 
 Juste un rapide sommaire pour naviguer plus facilement dans la documentation.
 
@@ -30,41 +27,40 @@ Juste un rapide sommaire pour naviguer plus facilement dans la documentation.
   - [Servers.json](#serversjson)
 
 * [Login](#login)
-  * [Connexion QCM](#connexion-qcm)
-  * [Account objects](#accounts-objects)
-  * [Modules](#account-modules)
+  - [Connexion QCM](#connexion-qcm)
+  - [Account objects](#accounts-objects)
+  - [Modules](#account-modules)
 * [Élève](#élève)
-  * [Timeline](#timeline)
-  * [Timeline commune](#timeline-commune)
-  * [Sondages](#sondages)
-  * [Formulaires](#formulaires)
-  * [Visios](#visios)
-  * [Emploi du temps](#emploi-du-temps)
-  * [Messagerie](#messagerie)
-  * [Cahier de texte](#cahier-de-texte)
-  * [Vie scolaire](#vie-scolaire)
-  * [Carnet de correspondance](#carnet-de-correspondance)
-  * [Documents administratifs](#documents-administratifs)
-  * [Notes](#notes)
-  * [Espaces de travail](#espaces-de-travail)
-  * [Manuels numériques](#manuels-numériques)
-  * [QCMs](#qcms)
-  * [Commandes](#commandes)
+  - [Timeline](#timeline)
+  - [Timeline commune](#timeline-commune)
+  - [Sondages](#sondages)
+  - [Formulaires](#formulaires)
+  - [Visios](#visios)
+  - [Emploi du temps](#emploi-du-temps)
+  - [Messagerie](#messagerie)
+  - [Cahier de texte](#cahier-de-texte)
+  - [Vie scolaire](#vie-scolaire)
+  - [Carnet de correspondance](#carnet-de-correspondance)
+  - [Documents administratifs](#documents-administratifs)
+  - [Notes](#notes)
+  - [Espaces de travail](#espaces-de-travail)
+  - [Manuels numériques](#manuels-numériques)
+  - [QCMs](#qcms)
+  - [Commandes](#commandes)
 * [Classe](#classe)
-  * [Vie de la classe](#vie-de-la-classe)
+  - [Vie de la classe](#vie-de-la-classe)
 * [Cloud](#cloud)
-  * [Chemins](#chemins)
-  * [Cloud élève](#cloud-élève)
-  * [Cloud espaces de travail](#cloud-espaces-de-travail)
-  * [Téléversement](#téléversement)
-  * [Téléchargement](#téléchargement)
-
+  - [Chemins](#chemins)
+  - [Cloud élève](#cloud-élève)
+  - [Cloud espaces de travail](#cloud-espaces-de-travail)
+  - [Téléversement](#téléversement)
+  - [Téléchargement](#téléchargement)
 
 ## Format de la documentation
 
-La base de l'api élève est ``https://api.ecoledirecte.com/``. Toutes les URLs relatives sont relatives à cette base.
+La base de l'api élève est `https://api.ecoledirecte.com/`. Toutes les URLs relatives sont relatives à cette base.
 
-Les requêtes prennent généralement des paramètres soit en *query string* dans l'URL soit en JSON dans le corps de la requête. Ces paramètres sont encodés au format `application/x-www-form-urlencoded`, bien que cet encodage soit totalement optionnel pour le corps de la requête.
+Les requêtes prennent généralement des paramètres soit en _query string_ dans l'URL soit en JSON dans le corps de la requête. Ces paramètres sont encodés au format `application/x-www-form-urlencoded`, bien que cet encodage soit totalement optionnel pour le corps de la requête.
 
 > [!NOTE]
 > On peut utiliser la fonction `encodeURIComponent()` en JavaScript et `urllib.parse.quote()` en Python pour encoder ces paramètres.
@@ -88,14 +84,13 @@ Les réponses suivent généralement le format suivant, et tout schéma de répo
 
 ### Exemple
 
-__GET__ `/v3/eleves/{eleve.id}/messages/{message.id}.awp`
+**GET** `/v3/eleves/{eleve.id}/messages/{message.id}.awp`
 
 Avec les paramètres de recherche `mode=destinataire` et les paramètres en JSON `{ "anneeMessages": "2021-2022" }`
 
 Correspond à la requête
 
-__POST__ `https://api.ecoledirecte.com/v3/eleves/{élève.id}/messages/{message.id}.awp?verbe=get&mode=destinataire` avec le corps `data={ "anneeMessages": "2021-2022" }` ou bien sous forme encodée `data=%7B%20%22anneeMessages%22%3A%20%222021-2022%22%20%7D`
-
+**POST** `https://api.ecoledirecte.com/v3/eleves/{élève.id}/messages/{message.id}.awp?verbe=get&mode=destinataire` avec le corps `data={ "anneeMessages": "2021-2022" }` ou bien sous forme encodée `data=%7B%20%22anneeMessages%22%3A%20%222021-2022%22%20%7D`
 
 ## Utilisation de l'API
 
@@ -103,6 +98,7 @@ __POST__ `https://api.ecoledirecte.com/v3/eleves/{élève.id}/messages/{message.
 > Avant tout, merci d'ajouter un user-agent dans vos headers pour "faire croire" à ED que vous utilisez un "vrai" navigateur pour faire vos requetes !
 > Il faut savoir que si vous utilisez un useragent pour obtenir un token, il faudra utiliser le même useragent avec ce token. Si jamais un autre UA est utilisé, le token sera invlidé.
 > Si vous n'avez pas d'idée en voici un :
+>
 > ```
 > Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36
 > ```
@@ -115,12 +111,11 @@ Cela concerne toutes les routes à l'exception de `/login`. Il faut passer un `H
 X-Token: <token>
 ```
 
-
 ### Codes erreur
 
 Liste de differents codes erreur trouvés au fil du temps avec leur description et des solutions pour fixer le pb
 
-*Note : Les requêtes renveront (sauf grosse erreur côté serveur avec une 5xx) toujours dans leur header un code 200, même en cas d'erreur*
+_Note : Les requêtes renveront (sauf grosse erreur côté serveur avec une 5xx) toujours dans leur header un code 200, même en cas d'erreur_
 
 ```
 Code: 250
@@ -144,20 +139,18 @@ Problème: Format JSON invalide
 Solution: Vérifier que le body de la requete a bien été envoyé en raw (ou plain text) et qu'il respecte le formatage donné dans la documentation
 ```
 
-
-
-
 ### Servers.json
 
 EcoleDirecte n'utilise pas qu'un seul serveur, il est possible d'obtenir des informations sur les serveurs du site en une seule requete.
 La raison pour laquelle cette partie est dans la partie référence c'est car cela n'a pas trop d'utilitée a vraiment parler...
 
 > [!NOTE]
-> Il semblerait que le fichier soit statique :c (les pings sont les mêmes depuis que j'ai commencé la doc)*
+> Il semblerait que le fichier soit statique :c (les pings sont les mêmes depuis que j'ai commencé la doc)\*
 
 Voici le lien du fichier : [https://www.ecoledirecte.com/EDCluster/servers.json](https://www.ecoledirecte.com/EDCluster/servers.json)
 
 Échantillon du fichier :
+
 ```js
 {
   "servers": [ //On va recevoir une liste d'objets comme celui ci dessous
@@ -196,15 +189,16 @@ Voici le lien du fichier : [https://www.ecoledirecte.com/EDCluster/servers.json]
 }
 ```
 
-----
+---
 
 Ici se trouve toute la documentation, assurez-vous d'avoir lu la référence avant de commencer
 
 ## Login
 
-__POST__ `/v3/login.awp`
+**POST** `/v3/login.awp`
 
 Data en body :
+
 ```json
 {
   "identifiant": "Username",
@@ -231,6 +225,7 @@ Différents exemples de réponses complètes. Elles suivent le modèle de répon
   }
 }
 ```
+
 </details>
 
 <details>
@@ -246,6 +241,7 @@ Différents exemples de réponses complètes. Elles suivent le modèle de répon
   }
 }
 ```
+
 </details>
 
 <details>
@@ -261,6 +257,7 @@ Différents exemples de réponses complètes. Elles suivent le modèle de répon
   }
 }
 ```
+
 </details>
 
 ### Connexion QCM
@@ -268,78 +265,83 @@ Différents exemples de réponses complètes. Elles suivent le modèle de répon
 > [!WARNING]
 > Si vous obtenez un code 250 concernant la connexion, vous devez implémenter la méthode suivante :<br>
 
-> [!NOTE] 
-> **Gardez bien le token mis dans la réponse lors de votre tentative de connexion !**
+> [!NOTE] > **Gardez bien le token mis dans la réponse lors de votre tentative de connexion !**
 
- __GET__ `/v3/connexion/doubleauth.awp`
+**GET** `/v3/connexion/doubleauth.awp`
 
- Permet de récupérer le QCM (question et réponses) afin de pouvoir se connecter.
+Permet de récupérer le QCM (question et réponses) afin de pouvoir se connecter.
 
- > [!NOTE] 
- > Data : {} (objet vide). Obligatoire sinon erreur parametres incorrect
+> [!NOTE]
+> Data : {} (objet vide). Obligatoire sinon erreur parametres incorrect
 
-
- Réponse (toutes les questions/réponses sont encodées en Base64) :
+Réponse (toutes les questions/réponses sont encodées en Base64) :
 
 (_Cette réponse est à titre d'exemple_)
+
 ```jsonc
 {
-    "code": 200,
-    "data": {
-        "question": "UXVlbCBlc3QgbGUgc2VucyBkZSBsYSB2aWUgPw==", // Quel est le sens de la vie ?
-        "propositions": [
-            "NDI==", // 42
-            "TGUgZnJvbWFnZQ==", // Le fromage 
-            "MiAxNDcgNDgzIDY0Nw==", // 2 147 483 647
-            //et ainsi de suite selon les réponses...
-        ]
-    },
-    "message": null, // ???
-    "host": "HTTP<n° serveur>"
+  "code": 200,
+  "data": {
+    "question": "UXVlbCBlc3QgbGUgc2VucyBkZSBsYSB2aWUgPw==", // Quel est le sens de la vie ?
+    "propositions": [
+      "NDI==", // 42
+      "TGUgZnJvbWFnZQ==", // Le fromage
+      "MiAxNDcgNDgzIDY0Nw==" // 2 147 483 647
+      //et ainsi de suite selon les réponses...
+    ]
+  },
+  "message": null, // ???
+  "host": "HTTP<n° serveur>"
 }
 ```
+
 Une fois que vous avez récupéré les questions ainsi que les réponses :
 
-__POST__ `/v3/connexion/doubleauth.awp`
+**POST** `/v3/connexion/doubleauth.awp`
 
 Permet de répondre au QCM afin de pouvoir se connecter.
 
-Data :  
+Data :
+
 ```jsonc
 {
-    "choix": "NDI==" // Votre réponse au QCM encodée en Base64
+  "choix": "NDI==" // Votre réponse au QCM encodée en Base64
 }
 ```
 
 Si tout se passe bien, vous devriez avoir une réponse comme celle-ci :
 
 (_Cette réponse est à titre d'exemple_)
+
 ```jsonc
 {
-    "code": 200,
-    "data": {
-        "cn": "<string spécifique encodée en Base64>",
-        "cv": "<string spécifique encodée en Base64>"
-    },
-    "message": null, // ???
-    "host": "HTTP<n°serveur>"
+  "code": 200,
+  "data": {
+    "cn": "<string spécifique encodée en Base64>",
+    "cv": "<string spécifique encodée en Base64>"
+  },
+  "message": null, // ???
+  "host": "HTTP<n°serveur>"
 }
 ```
+
 Après tout cela, vous devez refaire une requête login, en y incluant cette fois les objets "cn" et "cv":
+
 ```jsonc
 {
-    "identifiant": "<identifiant>",
-    "motdepasse": "<mot de passe>",
-    "isReLogin": false,
-    "uuid": "",
-    "fa": [
-        {
-            "cn": "<cn>",
-            "cv": "<cv>"
-        }
-    ]
+  "identifiant": "<identifiant>",
+  "motdepasse": "<mot de passe>",
+  "isReLogin": false,
+  "uuid": "",
+  "fa": [
+    {
+      "cn": "<cn>",
+      "cv": "<cv>"
+    }
+  ]
 }
 ```
+
 Et voilà, vous avez enfin votre token valide, prêt à être utilisé !
 
 > [!NOTE]
@@ -681,60 +683,62 @@ Voici la liste des modules qui ont été documentés jusqu'a présent
 }
 ```
 
-
 ## Élève
 
 ### Timeline
 
 Je sais pas qui aurait besoin de la timeline mais bon (:
 
-__GET__ `/v3/eleves/{id}/timeline.awp`
+**GET** `/v3/eleves/{id}/timeline.awp`
 
 Data dans la réponse :
+
 ```js
-[ //Liste des évènements relatif au compte (quelques exemples d'évènement peuvent être trouvés)
+[
+  //Liste des évènements relatif au compte (quelques exemples d'évènement peuvent être trouvés)
   {
-    "date": "2021-12-05", //String | Date de l'evènement
-    "typeElement": "Note", //String | Type de l'event (Note / Abscence / Document / Messagerie / VieScolaire / ...)
-    "idElement": 0, // identifiant du message / evt de vie scolaire / document associé
-    "titre": "Nouvelle évaluation", //String | Titre de l'evenement
-    "soustitre": "ED.PHYSIQUE & SPORT.",
-    "contenu": "natation du 15/11/2021" //String | Contenu de l'evenement
+    date: "2021-12-05", //String | Date de l'evènement
+    typeElement: "Note", //String | Type de l'event (Note / Abscence / Document / Messagerie / VieScolaire / ...)
+    idElement: 0, // identifiant du message / evt de vie scolaire / document associé
+    titre: "Nouvelle évaluation", //String | Titre de l'evenement
+    soustitre: "ED.PHYSIQUE & SPORT.",
+    contenu: "natation du 15/11/2021", //String | Contenu de l'evenement
   },
   {
-    "date": "2021-09-20",
-    "typeElement": "VieScolaire",
-    "idElement": 527,
-    "titre": "Absence",
-    "soustitre": "2 demi-journées",
-    "contenu": "Justifiée"
+    date: "2021-09-20",
+    typeElement: "VieScolaire",
+    idElement: 527,
+    titre: "Absence",
+    soustitre: "2 demi-journées",
+    contenu: "Justifiée",
   },
   {
-    "date": "2021-09-17",
-    "typeElement": "Document",
-    "idElement": 2538,
-    "titre": "Nouveau document à télécharger",
-    "soustitre": "",
-    "contenu": "Invitation 50 ans"
+    date: "2021-09-17",
+    typeElement: "Document",
+    idElement: 2538,
+    titre: "Nouveau document à télécharger",
+    soustitre: "",
+    contenu: "Invitation 50 ans",
   },
   {
-    "date": "2021-09-09",
-    "typeElement": "Document",
-    "idElement": 1144,
-    "titre": "Nouveau document à télécharger",
-    "soustitre": "",
-    "contenu": "Certificat de scolarité"
-  }
-]
+    date: "2021-09-09",
+    typeElement: "Document",
+    idElement: 1144,
+    titre: "Nouveau document à télécharger",
+    soustitre: "",
+    contenu: "Certificat de scolarité",
+  },
+];
 ```
 
 ### Timeline commune
 
-__GET__ `/v3/E/{id}/timelineAccueilCommun.awp`
+**GET** `/v3/E/{id}/timelineAccueilCommun.awp`
 
 C'est la timeline de l'établissement que tous les élèves voient. Elle inclue les post-its.
 
 Data dans la réponse :
+
 ```typescript
 {
   "evenements": [], // ?
@@ -761,13 +765,13 @@ Data dans la réponse :
 
 ### Sondages
 
-__GET__ `/v3/rdt/sondages.awp`
+**GET** `/v3/rdt/sondages.awp`
 
 J'ai eu une réponse avec une liste vide dans `data` donc réponse inconnue.
 
 ### Formulaires
 
-__GET__ `/v3/edforms.awp`
+**GET** `/v3/edforms.awp`
 
 Endpoint pour récupérer les données sur les formulaires
 
@@ -781,53 +785,54 @@ Data en body :
 }
 
 ```
-Remplacer ```1234``` par l'ID d'élève
+
+Remplacer `1234` par l'ID d'élève
 
 Data dans la réponse :
 
 ```typescript
 [
-    {
-        "questions": [
-            {
-                "id": 515, // ID de la question
-                "question": string, // encodé en base64
-                "enonce": string,  // encodé en base64
-                "typeQ": "radio", // type de sélection de choix ("radio", "textarea", "checkbox")
-                "ordre": 16384, // ?
-                "required": true, // question obligatoire ?
-                "minChecks": 0, // nombre de choix minimal ?
-                "maxChecks": 0,  // nombre de choix maximal ?
-                "propositions": [
-                    {
-                        "id": 2568, // ID de la réponse ?
-                        "enonce": string, // encodé en base64
-                        "choisie": 0 // Réponse choisie ?
-                    }
-                ]
-            }
+  {
+    questions: [
+      {
+        id: 515, // ID de la question
+        question: string, // encodé en base64
+        enonce: string, // encodé en base64
+        typeQ: "radio", // type de sélection de choix ("radio", "textarea", "checkbox")
+        ordre: 16384, // ?
+        required: true, // question obligatoire ?
+        minChecks: 0, // nombre de choix minimal ?
+        maxChecks: 0, // nombre de choix maximal ?
+        propositions: [
+          {
+            id: 2568, // ID de la réponse ?
+            enonce: string, // encodé en base64
+            choisie: 0, // Réponse choisie ?
+          },
         ],
-        "reponses": [], // Vide même après avoir répondu au formulaire ?
-        "formulaire": {
-            "id": 171, // ?
-            "typeF": "f", // ?
-            "titre": string, // texte normal
-            "introduction": string, // encodé en base64
-            "conclusion": string, //encodé en base64
-            "signature": false, // ?
-            "created": "2024-01-07 17:23:59" // Date de création du formulaire
-        },
-        "participant": {
-            "id": 15347, // ?
-            "fini": "2024-01-08 21:48:43" // Date où le formulaire a été complété
-        }
-    }
-]
+      },
+    ],
+    reponses: [], // Vide même après avoir répondu au formulaire ?
+    formulaire: {
+      id: 171, // ?
+      typeF: "f", // ?
+      titre: string, // texte normal
+      introduction: string, // encodé en base64
+      conclusion: string, //encodé en base64
+      signature: false, // ?
+      created: "2024-01-07 17:23:59", // Date de création du formulaire
+    },
+    participant: {
+      id: 15347, // ?
+      fini: "2024-01-08 21:48:43", // Date où le formulaire a été complété
+    },
+  },
+];
 ```
 
 ### Visios
 
-__GET__ `/v3/E/{id}/visios.awp`
+**GET** `/v3/E/{id}/visios.awp`
 
 Pas de visios ici non plus donc réponse inconnue.
 
@@ -836,11 +841,12 @@ Pas de visios ici non plus donc réponse inconnue.
 Le titre est plutot clair non ?
 
 > [!NOTE]
-> Si jamais le temps est incorrect alors data sera juste un array vide*
+> Si jamais le temps est incorrect alors data sera juste un array vide\*
 
-__GET__ `/v3/E/{id}/emploidutemps.awp`
+**GET** `/v3/E/{id}/emploidutemps.awp`
 
 Data en body :
+
 ```json
 {
   "dateDebut": "2021-12-15",
@@ -850,70 +856,86 @@ Data en body :
 ```
 
 Data dans la réponse :
+
 ```js
 [
   {
-    "id": 46234, //int | Semble être un identifiant unique du cours
-    "text": "NUMERIQUE SC.INFORM.", //string | Nom du cours (peut diférer de la matière)
-    "matiere": "NUMERIQUE SC.INFORM.",
-    "codeMatiere": "NSINF", //string | Code matière interne au service ED
-    "typeCours": "COURS", //string | Semble varier (COURS / PERMANENCE)
-    "start_date": "2021-12-15 08:00",
-    "end_date": "2021-12-15 08:55",
-    "color": "#91b2bc", //string | Couleur hex du cours sur l'edt
-    "dispensable": false, //string | Si l'élève doit se rendre en cours
-    "dispense": 0, //int | Rhalala, le sport (:
-    "prof": "MaitreRouge",
-    "salle": "SALLE 11 INFO",
-    "classe": "", //string | vide si est dispensé dans plusieures classes
-    "classeId": 0, //int | ID de la classe dans laquelle le cours est dispensé (0 si est dispensé dans plusieures classes)
-    "classeCode": "", //int | Code de la classe (je pense qu'on a compris avec le temps que c'était vide si la cours était dispensé dans plusieures classes)
-    "groupe": "T_NSINF-1", //string | Nom du groupe (si dispensé dans plusieures classes)
-    "groupeCode": "T_NSINF-1",//string | Code du groupe
-    "isFlexible": false, //bool | ???
-    "groupeId": 2004, //int | ID du groupe
-    "icone": "", //string | Depuis quand on peut avoir des icones ?
-    "isModifie": false, //bool | ???
-    "contenuDeSeance": false, //bool | false même si du contenu est posté
-    "devoirAFaire": false, //bool | false même si un devoir est posté
-    "isAnnule": false //bool | Si le cours est annulé (franglais dégeu)
+    id: 46234, //int | Semble être un identifiant unique du cours
+    text: "NUMERIQUE SC.INFORM.", //string | Nom du cours (peut diférer de la matière)
+    matiere: "NUMERIQUE SC.INFORM.",
+    codeMatiere: "NSINF", //string | Code matière interne au service ED
+    typeCours: "COURS", //string | Semble varier (COURS / PERMANENCE)
+    start_date: "2021-12-15 08:00",
+    end_date: "2021-12-15 08:55",
+    color: "#91b2bc", //string | Couleur hex du cours sur l'edt
+    dispensable: false, //string | Si l'élève doit se rendre en cours
+    dispense: 0, //int | Rhalala, le sport (:
+    prof: "MaitreRouge",
+    salle: "SALLE 11 INFO",
+    classe: "", //string | vide si est dispensé dans plusieures classes
+    classeId: 0, //int | ID de la classe dans laquelle le cours est dispensé (0 si est dispensé dans plusieures classes)
+    classeCode: "", //int | Code de la classe (je pense qu'on a compris avec le temps que c'était vide si la cours était dispensé dans plusieures classes)
+    groupe: "T_NSINF-1", //string | Nom du groupe (si dispensé dans plusieures classes)
+    groupeCode: "T_NSINF-1", //string | Code du groupe
+    isFlexible: false, //bool | ???
+    groupeId: 2004, //int | ID du groupe
+    icone: "", //string | Depuis quand on peut avoir des icones ?
+    isModifie: false, //bool | ???
+    contenuDeSeance: false, //bool | false même si du contenu est posté
+    devoirAFaire: false, //bool | false même si un devoir est posté
+    isAnnule: false, //bool | Si le cours est annulé (franglais dégeu)
   },
   {
-    "id": 78905,
-    "text": "ANGLAIS LV1",
-    "matiere": "ANGLAIS LV1",
-    "codeMatiere": "AGL1",
-    "typeCours": "COURS",
-    "start_date": "2021-12-15 10:00",
-    "end_date": "2021-12-15 10:55",
-    "color": "#ff66cc",
-    "dispensable": false,
-    "dispense": 0,
-    "prof": "Florian L",
-    "salle": "SALLE 44",
-    "classe": "Terminale B",
-    "classeId": 44,
-    "classeCode": "TB",
-    "groupe": "",
-    "groupeCode": "",
-    "isFlexible": false,
-    "groupeId": 0,
-    "icone": "",
-    "isModifie": false,
-    "contenuDeSeance": false,
-    "devoirAFaire": false,
-    "isAnnule": false
-  }
-]
+    id: 78905,
+    text: "ANGLAIS LV1",
+    matiere: "ANGLAIS LV1",
+    codeMatiere: "AGL1",
+    typeCours: "COURS",
+    start_date: "2021-12-15 10:00",
+    end_date: "2021-12-15 10:55",
+    color: "#ff66cc",
+    dispensable: false,
+    dispense: 0,
+    prof: "Florian L",
+    salle: "SALLE 44",
+    classe: "Terminale B",
+    classeId: 44,
+    classeCode: "TB",
+    groupe: "",
+    groupeCode: "",
+    isFlexible: false,
+    groupeId: 0,
+    icone: "",
+    isModifie: false,
+    contenuDeSeance: false,
+    devoirAFaire: false,
+    isAnnule: false,
+  },
+];
 ```
 
 ### Messagerie
 
-__GET__ `/v3/eleves/{id}/messages.awp`
+**GET** `/v3/eleves/{id}/messages.awp`
 
-Renvoie toutes les infos des la messagerie
+Renvoie les messages selon certains paramètres
 
-Data dans la réponse : 
+Data en body :
+
+```typescript
+{
+  anneeMessages: "YYYY-YYYY"; //Année des messages
+}
+```
+
+Paramètres à passer dans l'url
+
+**`typeRecuperation`** : _`received`_ (reçus) _`sent`_ (envoyés) _`draft`_ (brouillons) _`archived`_ (archivés) _`classeur`_ (dans un dossier)
+
+**`idClasseur`** : à 0 tout le temps sauf si on veut les messages dans un dossier. Dans ce cas, c'est l'Id du "classeur"
+
+Data dans la réponse :
+
 ```typescript
 "classeurs": [ // Dossiers de la messagerie
      {
@@ -925,11 +947,12 @@ Data dans la réponse :
 
 ### Cahier de texte
 
-__GET__ `/v3/Eleves/{id}/cahierdetexte.awp`
+**GET** `/v3/Eleves/{id}/cahierdetexte.awp`
 
-Donne les devoirs à faire à partir d'aujourd'hui (onglet *à faire*).
+Donne les devoirs à faire à partir d'aujourd'hui (onglet _à faire_).
 
 Data dans la réponse :
+
 ```typescript
 {
   "AAAA-MM-JJ": Array<{
@@ -948,18 +971,19 @@ Data dans la réponse :
 
 <br/>
 
-__GET__ `/v3/Eleves/{id}/cahierdetexte/{AAAA-MM-JJ}.awp`
+**GET** `/v3/Eleves/{id}/cahierdetexte/{AAAA-MM-JJ}.awp`
 
 Permet d'obtenir le travail à faire en détail et le contenu de séance pour un jour spécifique.
 
 > [!NOTE]
-> Il y a deux champs contenu de séance, un directement dans la matière et un dans à faire. Je suspecte que celui  dans à faire soit prévu avant la séance alors que celui directement dans la matière soit renseigné après les faits.
+> Il y a deux champs contenu de séance, un directement dans la matière et un dans à faire. Je suspecte que celui dans à faire soit prévu avant la séance alors que celui directement dans la matière soit renseigné après les faits.
 
 Je vérifierai la différence quand EcoleDirecte sera à nouveau fonctionnel et que j'aurai un exemple des deux.
 
 - Les données à l'intérieur des clés `contenu` sont encodées en base64. Une fois décodées, on obtient le contenu en HTML dans une balise `<p>`.
 
 Data dans la réponse :
+
 ```typescript
 {
   date: "AAAA-MM-JJ", // Même date que celle passée dans l'URL
@@ -1023,11 +1047,12 @@ Data dans la réponse :
 
 <br/>
 
-__PUT__ `/v3/Eleves/{id}/cahierdetexte.awp`
+**PUT** `/v3/Eleves/{id}/cahierdetexte.awp`
 
 Marque des devoirs comme faits ou non faits.
 
 Data en body :
+
 ```typescript
 {
   idDevoirsEffectues: number[],
@@ -1037,11 +1062,12 @@ Data en body :
 
 <br/>
 
-__POST__ `/v3/eleves/{id}/afaire/commentaires.awp`
+**POST** `/v3/eleves/{id}/afaire/commentaires.awp`
 
 Poste un commentaire sous un travail à faire ou un contenu de séance
 
 Data en body :
+
 ```typescript
 {
   message: string, // encodé en base64
@@ -1050,6 +1076,7 @@ Data en body :
 ```
 
 Data dans la réponse :
+
 ```typescript
 {
   id: number, // Identifiant du commentaire posté
@@ -1060,9 +1087,10 @@ Data dans la réponse :
 
 Endpoint qui sert a afficher les données sur la page vie de classe
 
-__GET__ `/v3/eleves/{id}/viescolaire.awp`
+**GET** `/v3/eleves/{id}/viescolaire.awp`
 
 Data dans la réponse :
+
 ```js
 {
   "absencesRetards":[
@@ -1121,9 +1149,10 @@ Data dans la réponse :
 
 Permet d'obtenir une liste des correspondances.
 
-__GET__ `/v3/eleves/{id}/eleveCarnetCorrespondance.awp`
+**GET** `/v3/eleves/{id}/eleveCarnetCorrespondance.awp`
 
 Data dans la réponse :
+
 ```jsonc
 {
   "correspondances": [
@@ -1139,13 +1168,15 @@ Data dans la réponse :
 
 Permet d'obtenir la liste des documents administratifs associées à une année scolaire, ou à l'année actuelle.
 
-__GET__ `/v3/elevesDocuments.awp`
+**GET** `/v3/elevesDocuments.awp`
 
 Paramètres de recherche :
- - `archive=` pour l'année actuelle
- - `archive=AAAA-AAAA` pour spécifier une année précise
+
+- `archive=` pour l'année actuelle
+- `archive=AAAA-AAAA` pour spécifier une année précise
 
 Data dans la réponse :
+
 ```typescript
 {
   factures: [], // ?
@@ -1163,27 +1194,29 @@ Data dans la réponse :
 ```
 
 Type des objets document :
+
 ```typescript
 type Document = {
-  id: number,
-  libelle: string,
-  idEleve: number,
-  date: "AAAA-MM-JJ",
-  type: "Note" | "Doc" | "",
-  signatureDemandee: bool, // ?
-  signature: {}
-}
+  id: number;
+  libelle: string;
+  idEleve: number;
+  date: "AAAA-MM-JJ";
+  type: "Note" | "Doc" | "";
+  signatureDemandee: bool; // ?
+  signature: {};
+};
 ```
 
 Les documents peuvent être téléchargés via la route de téléchargement grâce à leur id.
 
 ### Notes
 
-__GET__ `/v3/eleves/{id}/notes.awp`
+**GET** `/v3/eleves/{id}/notes.awp`
 
 Les données dans la réponse sont un peu un bordel. Il y a les moyennes par période (trimestres et année), puis les notes individuelles, puis les paramètres d'affichage des notes. Ce qui veut dire que même si l'établissement désactive l'affichage de jsp quoi c'est quand même transmis, je pense (donc on peut quand même y accéder).
 
 Data en body :
+
 ```typescript
 {
   "anneeScolaire": "",
@@ -1191,6 +1224,7 @@ Data en body :
 ```
 
 Data dans la réponse :
+
 ```typescript
 {
   foStat: string, // Une sorte d'identifiant bizarre
@@ -1359,46 +1393,48 @@ Data dans la réponse :
 
 ### Espaces de travail
 
-__GET__ `/v3/E/{id}/espacestravail.awp`
+**GET** `/v3/E/{id}/espacestravail.awp`
 
 Liste les espaces de travail relatifs à l'élève. Voir route suivante pour le type workspace
 
 Data dans la réponse :
+
 ```typescript
-Array<Workspace>
+Array<Workspace>;
 ```
 
 <br/>
 
-__GET__ `/v3/E/{id}/espacestravail/{espace.id}.awp`
+**GET** `/v3/E/{id}/espacestravail/{espace.id}.awp`
 
 Data dans la réponse :
+
 ```typescript
 type Workspace = {
-  id: number, // Identifiant de l'espace de travail
-  titre: string,
-  description: "", // Semble toujours vide, peut-être une version plus courte de "résumé"
-  resume: string, // Encodé en base64
-  cloud: true, // Probablement si le cloud, les discussions ou l'agenda sont activés ou non
-  discussion: bool,
-  agenda: bool,
-  public: bool, // Si l'espace est visible par tous les élèves
-  ouvert: bool, // Si les élèves peuvent rejoindre l'espace librement
-  type: "LIBRE",
-  estMembre: bool,
-  estAdmin: false,
-  salleDesProfs: false, // Probablement pour l'équivalent prof des espaces de travail qui peuvent aussi servir de salle des profs numérique
-  creePar: string, // Nom du créateur (Prénom NOM ... NOMS)
-  droitUtilisateur: 0 | 1 | 2, // ?
-  nbMembres: 0,
-  couleurEvenementAgenda: "#RRVVBB",
-  creeLe?: "JJ/MM/AAAA à HH:MM",
-}
+  id: number; // Identifiant de l'espace de travail
+  titre: string;
+  description: ""; // Semble toujours vide, peut-être une version plus courte de "résumé"
+  resume: string; // Encodé en base64
+  cloud: true; // Probablement si le cloud, les discussions ou l'agenda sont activés ou non
+  discussion: bool;
+  agenda: bool;
+  public: bool; // Si l'espace est visible par tous les élèves
+  ouvert: bool; // Si les élèves peuvent rejoindre l'espace librement
+  type: "LIBRE";
+  estMembre: bool;
+  estAdmin: false;
+  salleDesProfs: false; // Probablement pour l'équivalent prof des espaces de travail qui peuvent aussi servir de salle des profs numérique
+  creePar: string; // Nom du créateur (Prénom NOM ... NOMS)
+  droitUtilisateur: 0 | 1 | 2; // ?
+  nbMembres: 0;
+  couleurEvenementAgenda: "#RRVVBB";
+  creeLe?: "JJ/MM/AAAA à HH:MM";
+};
 ```
 
 <br/>
 
-__POST__ `/v3/E/{id}/espacestravail/{espace.id}/acces.awp`
+**POST** `/v3/E/{id}/espacestravail/{espace.id}/acces.awp`
 
 Permet de joindre un espace de travail.
 
@@ -1408,16 +1444,18 @@ Si la notation typescript ne vous est pas familière, ça veut dire qu'il faut r
 > TODO: Vérifier si le corps de requête est nécessaire pour joindre l'espace de travail
 
 Data en body :
+
 ```typescript
-Omit<Workspace, "type" | "creeLe"> & {
-  cloudLibelle: string, // Semble être la même valeur que le `titre` de l'espace
-  fullLoaded: false,
-}
+Omit<Workspace, "type" | "creeLe"> &
+  {
+    cloudLibelle: string, // Semble être la même valeur que le `titre` de l'espace
+    fullLoaded: false,
+  };
 ```
 
 <br/>
 
-__DELETE__ `/v3/E/{id}/espacestravail/{espace.id}/acces.awp`
+**DELETE** `/v3/E/{id}/espacestravail/{espace.id}/acces.awp`
 
 Permet de quitter un espace de travail.
 
@@ -1425,54 +1463,58 @@ Pas besoin d'envoyer quoi que ce soit en body; pas de réponse non plus.
 
 ### Manuels numériques
 
-__GET__ `/v3/Eleves/{id}/manuelsNumeriques.awp`
+**GET** `/v3/Eleves/{id}/manuelsNumeriques.awp`
 
 Liste les manuels numériques disponibles pour l'élève.
 
 Data dans la réponse :
+
 ```typescript
 Array<{
-  libelle: string,
-  url: string,
-  urlCouverture: string,
-  urlTelechargement: "",
-  editeur: string,
-  idRessource: string, // Je sais pas à quoi ça peut bien servir (peut-être dans l'EDT ?)
-  affecte: true, // ?
-  ogec: string, // Code RNE de l'établissement scolaire
-  eleves: [], // ?
-  disciplines: Array<string>, // Codes des matières concernées. Vide ou 1 élément jusqu'ici
-}>
+  libelle: string;
+  url: string;
+  urlCouverture: string;
+  urlTelechargement: "";
+  editeur: string;
+  idRessource: string; // Je sais pas à quoi ça peut bien servir (peut-être dans l'EDT ?)
+  affecte: true; // ?
+  ogec: string; // Code RNE de l'établissement scolaire
+  eleves: []; // ?
+  disciplines: Array<string>; // Codes des matières concernées. Vide ou 1 élément jusqu'ici
+}>;
 ```
 
 ### QCMs
 
-__GET__ `/v3/eleves/{id}/qcms/0/associations.awp`
+**GET** `/v3/eleves/{id}/qcms/0/associations.awp`
 
 Aucune idée de ce que ça fait. Si vous avez des données, n'hésitez pas.
 
 ### Commandes
+
 Il s'agit d'un système de commande (click-and-collect).
 
-__GET__ `/v3/menusRestaurationScolaire.awp`
+**GET** `/v3/menusRestaurationScolaire.awp`
 
 Permet de récupérer l'identifiant du menu (document).
 Data dans la réponse (pour chaque semaine disponible) :
+
 ```typescript
 type Semaine = {
-  semaine: number, // numéro de la semaine
+  semaine: number; // numéro de la semaine
   doc: Array<{
-    libelle: string, // nom du document (Exemple: Menu semaine n°40)
-    id: number // numéro du document (voir téléchargement pour récupérer le document)
-  }>
-}
+    libelle: string; // nom du document (Exemple: Menu semaine n°40)
+    id: number; // numéro du document (voir téléchargement pour récupérer le document)
+  }>;
+};
 ```
 
-__GET__ `/v3/E/{id}/commandesPassage.awp`
+**GET** `/v3/E/{id}/commandesPassage.awp`
 
 Permet de récupérer les points de passage possibles ainsi que des articles disponibles.
 
 Data dans la réponse :
+
 ```typescript
 {
   historiqueCommandes: Array<{
@@ -1562,11 +1604,12 @@ Data dans la réponse :
 }
 ```
 
-__GET__ /v3/E/{id}/commandesPassage/pointsDePassage/{idPDP}/{date}.awp
+**GET** /v3/E/{id}/commandesPassage/pointsDePassage/{idPDP}/{date}.awp
 
 Permet de vérifier si le point de passage est possible le jour indiqué dans la requête.<br>Le format de la date est AAAAMMJJ.
 
 Data dans la réponse :
+
 ```typescript
 {
   creneauMinRetrait: string, // ???
@@ -1591,10 +1634,11 @@ Data dans la réponse :
 }
 ```
 
-__POST__ ``/v3/E/{id}/commandesPassage.awp``
+**POST** `/v3/E/{id}/commandesPassage.awp`
 
 Permet de passer une commande.
 Body:
+
 ```typescript
 {
   articles: Array<{
@@ -1630,7 +1674,9 @@ Body:
   pointDePassage: number // (idPDP)
 }
 ```
+
 En réponse, si la commande contient les bonnes informations :
+
 ```typescript
 {
 		idCommande: number,
@@ -1676,9 +1722,10 @@ En réponse, si la commande contient les bonnes informations :
 		}
 	}
 ```
+
 Sinon, elle renvoie un code 512.
 
-__DELETE__ ``v3/E/{id}/commandesPassage/{idCommande}.awp``<br>
+**DELETE** `v3/E/{id}/commandesPassage/{idCommande}.awp`<br>
 
 Permet de supprimer une commande, selon l'idCommande.<br>
 Il ne renvoie rien si l'idCommande est bon. Sinon, il renvoie simplement un code erreur 210.
@@ -1689,72 +1736,76 @@ Il ne renvoie rien si l'idCommande est bon. Sinon, il renvoie simplement un code
 
 Il existe deux routes différentes, mais je n'ai eu que des objets vides comme réponse.
 
-__GET__ `/v3/Classes/{classe.id}/viedelaclasse.awp`
+**GET** `/v3/Classes/{classe.id}/viedelaclasse.awp`
 
-__GET__ `/v3/R/{classe.id}/viedelaclasse.awp`
-
+**GET** `/v3/R/{classe.id}/viedelaclasse.awp`
 
 ## Cloud
 
 ### Chemins
 
-Les fichiers dans le cloud sont identifiés par leur chemin. C'est des chemins *windows*, parfois appelés `unc` dans l'API.
+Les fichiers dans le cloud sont identifiés par leur chemin. C'est des chemins _windows_, parfois appelés `unc` dans l'API.
 
 On trouve différents types de chemins, avec RNE le code RNE de l'établissement :
-  - Les chemins des clouds élèves, du type `\{RNE}\E\{id}\...`
-  - Les chemins des clouds des espaces de travail, du type `\{RNE}\W\{ent.id}\...`
-  - Les chemins des ressources temporaires, du type `\\STOCK-TMP\tmp\{RNE}_{role}_{id}_{hash}\...`
+
+- Les chemins des clouds élèves, du type `\{RNE}\E\{id}\...`
+- Les chemins des clouds des espaces de travail, du type `\{RNE}\W\{ent.id}\...`
+- Les chemins des ressources temporaires, du type `\\STOCK-TMP\tmp\{RNE}_{role}_{id}_{hash}\...`
 
 Parfois les chemins sont préfixés par un autre cloud, du type `\\CLOUD08\cloud\...`. Même si c'est pas pour tous les fichiers. TODO: Élucider la question.
 
 ### Cloud élève
 
-__GET__ `/v3/cloud/E/{id}.awp`
+**GET** `/v3/cloud/E/{id}.awp`
 
-Permet d'obtenir des informations sur un fichier ou un dossier (*nœud*) dans le cloud de l'élève.
+Permet d'obtenir des informations sur un fichier ou un dossier (_nœud_) dans le cloud de l'élève.
 
 Lorsque des informations sur un dossier sont demandées, ses nœuds fils sont aussi transmis, y compris les sous-dossiers et leurs nœuds fils à eux aussi, jusqu'à une certaine profondeur. Après, la propriété `isLoaded` des sous-dossiers est mise sur `false` et il faut refaire une requête pour obtenir le contenu de ces sous-dossiers.
 
 Paramètres de recherche :
- - `idfolder=` chemin de dossier, pour spécifier un dossier dont on veut obtenir le contenu. Ne pas indiquer pour obtenir la racine.
+
+- `idfolder=` chemin de dossier, pour spécifier un dossier dont on veut obtenir le contenu. Ne pas indiquer pour obtenir la racine.
 
 Data dans la réponse :
+
 ```typescript
-Array<Nœud>
+Array<Nœud>;
 ```
 
 ```typescript
 type Nœud = {
-  type: "folder" | "file",
-  libelle: string, // Nom du dossier ou fichier, "/" pour la racine
-  date: "AAAA-MM-JJ HH:MM:SS",
-  taille: number,
-  quota?: number,
-  id: string, // Chemin UNC
-  isLoaded?: bool, // Présent pour les dossiers, voir plus haut
-  children?: Array<Nœud>, // Présent pour les dossiers
-  readonly: bool,
-  url?: string, // Pour les liens, leur URL
-  description?: string, // Pour les liens, leur description encodée en base64
-  proprietaire?: { // Présent pour les fichiers
-    id: number,
-    type: "E",
-    nom: string,
-    prenom: string,
-    particule: "",
-  }
-}
+  type: "folder" | "file";
+  libelle: string; // Nom du dossier ou fichier, "/" pour la racine
+  date: "AAAA-MM-JJ HH:MM:SS";
+  taille: number;
+  quota?: number;
+  id: string; // Chemin UNC
+  isLoaded?: bool; // Présent pour les dossiers, voir plus haut
+  children?: Array<Nœud>; // Présent pour les dossiers
+  readonly: bool;
+  url?: string; // Pour les liens, leur URL
+  description?: string; // Pour les liens, leur description encodée en base64
+  proprietaire?: {
+    // Présent pour les fichiers
+    id: number;
+    type: "E";
+    nom: string;
+    prenom: string;
+    particule: "";
+  };
+};
 ```
 
 <br/>
 
-__POST__ `/v3/cloud/E/{id}.awp`
+**POST** `/v3/cloud/E/{id}.awp`
 
 Permet de créer un nouveau fichier ou dossier dans le cloud. Pour ajouter des fichiers existants, utiliser la route de téléversement.
 
 La route prend en body une propriété `parentNode` qui peut être un objet `Nœud` complet mais la propriété `id` est la seule nécessaire, le reste est facultatif.
 
 Data en body :
+
 ```typescript
 {
   parentNode: Pick<Nœud, "id">,
@@ -1764,17 +1815,19 @@ Data en body :
 ```
 
 Data dans la réponse :
+
 ```typescript
-Nœud // Nœud créé
+Nœud; // Nœud créé
 ```
 
 <br/>
 
-__PUT__ `/v3/cloud/E/{id}.awp`
+**PUT** `/v3/cloud/E/{id}.awp`
 
 Permet de renommer un nœud et de changer le lien ou la description d'un lien.
 
 Data en body :
+
 ```typescript
 {
   node: Nœud,
@@ -1785,6 +1838,7 @@ Data en body :
 ```
 
 Data dans la réponse :
+
 ```typescript
 {
   newId: string,
@@ -1796,11 +1850,12 @@ Data dans la réponse :
 
 <br/>
 
-__COPY__ `/v3/cloud/E/{id}.awp`
+**COPY** `/v3/cloud/E/{id}.awp`
 
 Permet de copier des nœuds dans un autre dossier.
 
 Data en body :
+
 ```typescript
 {
   parentNode: Nœud, // Dossier de destination. TODO: Vérifier spécificité (id)
@@ -1809,17 +1864,19 @@ Data en body :
 ```
 
 Data dans la réponse :
+
 ```typescript
-Nœud // Dossier de destination, avec les nouveaux nœuds copiés
+Nœud; // Dossier de destination, avec les nouveaux nœuds copiés
 ```
 
 <br/>
 
-__DELETE__ `/v3/cloud/E/{id}.awp`
+**DELETE** `/v3/cloud/E/{id}.awp`
 
 Permet de supprimer un nœud.
 
 Data en body :
+
 ```typescript
 {
   tabNodes: Array<Nœud>, // TODO: Vérifier si plus d'un nœud peut être spécifié
@@ -1835,7 +1892,7 @@ Il est très probable que cette route fonctionne exactement comme celle élève.
 
 ### Téléversement
 
-__POST__ `/v3/televersement.awp`
+**POST** `/v3/televersement.awp`
 
 Permet de téléverser un ficher dans le cloud ou dans le stockage temporaire pour utilisation comme pièce jointe.
 
@@ -1846,6 +1903,7 @@ Si vous tentez de téléverser un fichier dans le cloud mais qu'un fichier du m�
 - Pour téléverser un fichier dans le stockage temporaire, il suffit d'envoyer le fichier en corps de requête comme cité précédemment.
 
 Dans ce cas, data dans la réponse :
+
 ```typescript
 {
   unc: string, // Chemin du fichier temporaire
@@ -1858,6 +1916,7 @@ On peut noter que le chemin est aussi présent dans la clef `message` de la rép
 - Pour téléverser un fichier dans le cloud, il faut en plus d'envoyer le fichier en corps, spécifier en paramètre de recherche `mode=CLOUD` et `dest={chemin}`, chemin étant le chemin du dossier dans lequel on téléverse.
 
 - Pour téléverser un lien dans le cloud, il suffit d'envoyer une requête avec un corps en JSON standard, qui contient :
+
 ```typescript
 {
   file: "{nom}.url;{url}", // nom étant le nom du lien et url son url
@@ -1866,17 +1925,19 @@ On peut noter que le chemin est aussi présent dans la clef `message` de la rép
 ```
 
 Dans ces deux cas, data dans la réponses :
+
 ```typescript
-Nœud
+Nœud;
 ```
 
 ### Téléchargement
 
-__GET__ `/v3/telechargement.awp`
+**GET** `/v3/telechargement.awp`
 
 Permet de télécharger les fichiers dans le cloud, en pièce jointe, dans le cahier de texte et les documents administratifs.
 
 Data en body :
+
 ```typescript
 {
   forceDownload: 0, // ?
