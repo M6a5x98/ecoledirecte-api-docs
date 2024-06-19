@@ -40,6 +40,7 @@ Juste un rapide sommaire pour naviguer plus facilement dans la documentation.
   * [Formulaires](#formulaires)
   * [Visios](#visios)
   * [Emploi du temps](#emploi-du-temps)
+  * [Messagerie](#messagerie)
   * [Cahier de texte](#cahier-de-texte)
   * [Vie scolaire](#vie-scolaire)
   * [Carnet de correspondance](#carnet-de-correspondance)
@@ -903,6 +904,22 @@ Data dans la réponse :
     "devoirAFaire": false,
     "isAnnule": false
   }
+]
+```
+
+### Messagerie
+
+__GET__ `/v3/eleves/{id}/messages.awp`
+
+Renvoie toutes les infos des la messagerie
+
+Data dans la réponse : 
+```typescript
+"classeurs": [ // Dossiers de la messagerie
+     {
+          "id": int,
+          "libelle": string //Nom du dossier
+     }
 ]
 ```
 
