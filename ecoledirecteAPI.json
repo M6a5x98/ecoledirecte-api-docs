@@ -1,0 +1,104 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "Ecole Directe API"
+    },
+    "servers": [
+        {
+            "url": "https://api.ecoledirecte.com"
+        }
+    ],
+    "paths": {
+        "/v3/login.awp": {
+            "post": {
+                "description": "Connecte l'utilisateur ou renvoie le token",
+                "requestBody": {
+                    "description": "Si vous avez déjà les valeur, vous pouvez remplir les chaînes de caractères vides",
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "type": "string",
+                                        "example": "\"identifiant\": \"username\",\"motdepasse\": \"password\", \"isRelogin\": false, \"fa\":[{\"cn\":\"\",\"cv\":\"\"}]"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "number"
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "accounts": {
+                                                    "type": "array"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v3/connexion/doubleauth.awp?verbe=get": {
+            "post": {
+                "description": "Permet de récupérer le QCM",
+                "requestBody": {
+                "required": true,
+                "content": {
+                    "application/x-www-form-urlencoded": {
+                        "schema": {
+                            "properties": {
+                                "data":{"type":"object", "example":{}}
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type":"object",
+                                "properties":{
+                                    "code":{"type":"number"},
+                                    "data":{
+                                        "type":"object",
+                                        "properties":{
+                                            "question":{"type":"string"},
+                                            "propositions": {"type":"array"}
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+}
