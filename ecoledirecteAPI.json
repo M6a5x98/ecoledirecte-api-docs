@@ -84,38 +84,115 @@
                                                                 }
                                                             }
                                                         },
-                                                        "idLogin":{"type":"integer"},
-                                                        "id":{"type":"integer"},
-                                                        "identifiant":{"type":"string"},
-                                                        "typeCompte":{"type":"string"},
-                                                        "codeOgec":{"type":"string"},
-                                                        "main":{"type":"boolean"},
-                                                        "lastConnexion":{"type":"string"},
-                                                        "civilite":{"type":"string"},
-                                                        "prenom":{"type":"string"},
-                                                        "particule":{"type":"string"},
-                                                        "nom":{"type":"string"},
-                                                        "email":{"type":"string"},
-                                                        "anneeScolaireCourante":{"type":"string"},
-                                                        "nomEtablissement":{"type":"string"},
-                                                        "logoEtablissement":{"type":"string"},
-                                                        "couleurAgendaEtablissement":{"type":"string"},
-                                                        "dicoEnLigneLeRobert":{"type":"boolean"},
-                                                        "socketToken":{"type":"string"},
-                                                        "parametresIndividuels":{"type":"object", "properties":{
-                                                            "isQrcode":{"type":"boolean"},
-                                                            "accessibilitéVisuelle":{"type":"boolean"}
-                                                        }},
-                                                        "profile":{
-                                                            "type":"object",
-                                                            "properties":{
-                                                                "sexe":{"type":"string"},
-                                                                "infoEDT":{"type":"string"},
-                                                                "nomEtablissement":{"type":"string"},
-                                                                "idEtablissement":{"type":"string"},
-                                                                "rneEtablissement":{"type":"string"},
-                                                                "telPortable":{"type":"string"}
-
+                                                        "idLogin": {
+                                                            "type": "integer"
+                                                        },
+                                                        "id": {
+                                                            "type": "integer"
+                                                        },
+                                                        "identifiant": {
+                                                            "type": "string"
+                                                        },
+                                                        "typeCompte": {
+                                                            "type": "string"
+                                                        },
+                                                        "codeOgec": {
+                                                            "type": "string"
+                                                        },
+                                                        "main": {
+                                                            "type": "boolean"
+                                                        },
+                                                        "lastConnexion": {
+                                                            "type": "string"
+                                                        },
+                                                        "civilite": {
+                                                            "type": "string"
+                                                        },
+                                                        "prenom": {
+                                                            "type": "string"
+                                                        },
+                                                        "particule": {
+                                                            "type": "string"
+                                                        },
+                                                        "nom": {
+                                                            "type": "string"
+                                                        },
+                                                        "email": {
+                                                            "type": "string"
+                                                        },
+                                                        "anneeScolaireCourante": {
+                                                            "type": "string"
+                                                        },
+                                                        "nomEtablissement": {
+                                                            "type": "string"
+                                                        },
+                                                        "logoEtablissement": {
+                                                            "type": "string"
+                                                        },
+                                                        "couleurAgendaEtablissement": {
+                                                            "type": "string"
+                                                        },
+                                                        "dicoEnLigneLeRobert": {
+                                                            "type": "boolean"
+                                                        },
+                                                        "socketToken": {
+                                                            "type": "string"
+                                                        },
+                                                        "parametresIndividuels": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "isQrcode": {
+                                                                    "type": "boolean"
+                                                                },
+                                                                "accessibilitéVisuelle": {
+                                                                    "type": "boolean"
+                                                                }
+                                                            }
+                                                        },
+                                                        "profile": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "sexe": {
+                                                                    "type": "string"
+                                                                },
+                                                                "infoEDT": {
+                                                                    "type": "string"
+                                                                },
+                                                                "nomEtablissement": {
+                                                                    "type": "string"
+                                                                },
+                                                                "idEtablissement": {
+                                                                    "type": "string"
+                                                                },
+                                                                "rneEtablissement": {
+                                                                    "type": "string"
+                                                                },
+                                                                "telPortable": {
+                                                                    "type": "string"
+                                                                },
+                                                                "idReelEtab": {
+                                                                    "type": "string"
+                                                                },
+                                                                "photo": {
+                                                                    "type": "string"
+                                                                },
+                                                                "classe": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "id": {
+                                                                            "type": "integer"
+                                                                        },
+                                                                        "code": {
+                                                                            "type": "string"
+                                                                        },
+                                                                        "libelle": {
+                                                                            "type": "string"
+                                                                        },
+                                                                        "estNote": {
+                                                                            "type": "integer"
+                                                                        }
+                                                                    }
+                                                                }
                                                             }
                                                         }
                                                     }
