@@ -37,19 +37,49 @@
                                     "type": "object",
                                     "properties": {
                                         "message": {
-                                            "type": "string"
+                                            "type": "string",
+                                            "example": ""
                                         },
                                         "code": {
-                                            "type": "number"
+                                            "type": "integer",
+                                            "example": 200
                                         },
                                         "token": {
-                                            "type": "string"
+                                            "type": "string",
+                                            "example": "token"
                                         },
                                         "data": {
                                             "type": "object",
                                             "properties": {
                                                 "accounts": {
-                                                    "type": "array"
+                                                    "type": "array",
+                                                    "minItems": 30,
+                                                    "maxItems": 35,
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "code": {
+                                                                "type": "string",
+                                                                "example": "EDT"
+                                                            },
+                                                            "enable": {
+                                                                "type": "boolean",
+                                                                "example": true
+                                                            },
+                                                            "ordre": {
+                                                                "type": "integer",
+                                                                "example": 50
+                                                            },
+                                                            "badge": {
+                                                                "type": "number",
+                                                                "example": 0
+                                                            },
+                                                            "params": {
+                                                                "type": "object",
+                                                                "example": {}
+                                                            }
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
@@ -65,32 +95,84 @@
             "post": {
                 "description": "Permet de récupérer le QCM",
                 "requestBody": {
-                "required": true,
-                "content": {
-                    "application/x-www-form-urlencoded": {
-                        "schema": {
-                            "properties": {
-                                "data":{"type":"object", "example":{}}
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "type": "string",
+                                        "example": "{}"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "minimum": 200,
+                                            "example": 200
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "question": {
+                                                    "type": "string",
+                                                    "example": "UXVlbCBlc3QgbGUgc2VucyBkZSBsYSB2aWUgPw=="
+                                                },
+                                                "propositions": {
+                                                    "type": "array",
+                                                    "example": "[\"NDI==\",\"TGUgZnJvbWFnZQ==\",\"MiAxNDcgNDgzIDY0Nw==\"]"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
                 }
-            },
-            "responses": {
-                "200": {
-                    "description": "OK",
+            }
+        },
+        "/v3/connexion/doubleauth.awp?verbe=post":{
+            "post": {
+                "description": "Permet de répondre au QCM",
+                "requestBody": {
+                    "description": "",
+                    "required": true,
                     "content": {
-                        "application/json": {
+                        "application/x-www-form-urlencoded": {
                             "schema": {
                                 "type":"object",
-                                "properties":{
-                                    "code":{"type":"number"},
-                                    "data":{
-                                        "type":"object",
-                                        "properties":{
-                                            "question":{"type":"string"},
-                                            "propositions": {"type":"array"}
-                                        }
+                                "properties": {
+                                    "choix":{"type":"string", "example":"NDI=="}
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Envoyer cn et cv dans les champs homonymes de /v3/login.awp",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type":"object",
+                                    "properties":{
+                                        "code":{"type":"integer","minimum":200},
+                                        "data":{"type":"object", "properties":{
+                                            "cn":{"type":"string"},
+                                            "cv": {"type":"string"}
+                                        }}
                                     }
                                 }
                             }
@@ -100,5 +182,4 @@
             }
         }
     }
-}
 }
