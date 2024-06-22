@@ -52,31 +52,70 @@
                                             "type": "object",
                                             "properties": {
                                                 "accounts": {
-                                                    "type": "array",
-                                                    "minItems": 30,
-                                                    "maxItems": 35,
-                                                    "items": {
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "code": {
-                                                                "type": "string",
-                                                                "example": "EDT"
-                                                            },
-                                                            "enable": {
-                                                                "type": "boolean",
-                                                                "example": true
-                                                            },
-                                                            "ordre": {
-                                                                "type": "integer",
-                                                                "example": 50
-                                                            },
-                                                            "badge": {
-                                                                "type": "number",
-                                                                "example": 0
-                                                            },
-                                                            "params": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "modules": {
+                                                            "type": "array",
+                                                            "minItems": 30,
+                                                            "maxItems": 35,
+                                                            "items": {
                                                                 "type": "object",
-                                                                "example": {}
+                                                                "properties": {
+                                                                    "code": {
+                                                                        "type": "string",
+                                                                        "example": "EDT"
+                                                                    },
+                                                                    "enable": {
+                                                                        "type": "boolean",
+                                                                        "example": true
+                                                                    },
+                                                                    "ordre": {
+                                                                        "type": "integer",
+                                                                        "example": 50
+                                                                    },
+                                                                    "badge": {
+                                                                        "type": "number",
+                                                                        "example": 0
+                                                                    },
+                                                                    "params": {
+                                                                        "type": "object",
+                                                                        "example": {}
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
+                                                        "idLogin":{"type":"integer"},
+                                                        "id":{"type":"integer"},
+                                                        "identifiant":{"type":"string"},
+                                                        "typeCompte":{"type":"string"},
+                                                        "codeOgec":{"type":"string"},
+                                                        "main":{"type":"boolean"},
+                                                        "lastConnexion":{"type":"string"},
+                                                        "civilite":{"type":"string"},
+                                                        "prenom":{"type":"string"},
+                                                        "particule":{"type":"string"},
+                                                        "nom":{"type":"string"},
+                                                        "email":{"type":"string"},
+                                                        "anneeScolaireCourante":{"type":"string"},
+                                                        "nomEtablissement":{"type":"string"},
+                                                        "logoEtablissement":{"type":"string"},
+                                                        "couleurAgendaEtablissement":{"type":"string"},
+                                                        "dicoEnLigneLeRobert":{"type":"boolean"},
+                                                        "socketToken":{"type":"string"},
+                                                        "parametresIndividuels":{"type":"object", "properties":{
+                                                            "isQrcode":{"type":"boolean"},
+                                                            "accessibilitéVisuelle":{"type":"boolean"}
+                                                        }},
+                                                        "profile":{
+                                                            "type":"object",
+                                                            "properties":{
+                                                                "sexe":{"type":"string"},
+                                                                "infoEDT":{"type":"string"},
+                                                                "nomEtablissement":{"type":"string"},
+                                                                "idEtablissement":{"type":"string"},
+                                                                "rneEtablissement":{"type":"string"},
+                                                                "telPortable":{"type":"string"}
+
                                                             }
                                                         }
                                                     }
@@ -143,7 +182,7 @@
                 }
             }
         },
-        "/v3/connexion/doubleauth.awp?verbe=post":{
+        "/v3/connexion/doubleauth.awp?verbe=post": {
             "post": {
                 "description": "Permet de répondre au QCM",
                 "requestBody": {
@@ -152,9 +191,12 @@
                     "content": {
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "type":"object",
+                                "type": "object",
                                 "properties": {
-                                    "choix":{"type":"string", "example":"NDI=="}
+                                    "choix": {
+                                        "type": "string",
+                                        "example": "NDI=="
+                                    }
                                 }
                             }
                         }
@@ -166,13 +208,23 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type":"object",
-                                    "properties":{
-                                        "code":{"type":"integer","minimum":200},
-                                        "data":{"type":"object", "properties":{
-                                            "cn":{"type":"string"},
-                                            "cv": {"type":"string"}
-                                        }}
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "minimum": 200
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "cn": {
+                                                    "type": "string"
+                                                },
+                                                "cv": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
