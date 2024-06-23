@@ -309,6 +309,71 @@
                     }
                 }
             }
+        },
+        "/v3/eleves/{id}/timeline.awp?verbe=get": {
+            "post": {
+                "description": "Renvoie la timeline",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "example":1234,
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "date": {
+                                                        "type": "string",
+                                                        "example": "2024-04-18"
+                                                    },
+                                                    "typeElement": {
+                                                        "type": "string",
+                                                        "example": "Note"
+                                                    },
+                                                    "idElement": {
+                                                        "type": "integer"
+                                                    },
+                                                    "titre": {
+                                                        "type": "string",
+                                                        "example": "Nouvelle évaluation"
+                                                    },
+                                                    "soustitre": {
+                                                        "type": "string",
+                                                        "example": "Français"
+                                                    },
+                                                    "contenu": {
+                                                        "type": "string",
+                                                        "example": "Dictée n°4"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
