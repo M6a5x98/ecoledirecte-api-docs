@@ -317,7 +317,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "example":1234,
+                        "example": 1234,
                         "required": true
                     }
                 ],
@@ -363,6 +363,103 @@
                                                     "contenu": {
                                                         "type": "string",
                                                         "example": "Dictée n°4"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v3/E/{id}/timelineAccueilCommun.awp": {
+            "post": {
+                "description": "Renvoie la timeline de l'établissement",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "evenements": {
+                                            "type": "array",
+                                            "example": []
+                                        },
+                                        "postits": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 2386
+                                                    },
+                                                    "type": {
+                                                        "type": "string",
+                                                        "example": "info"
+                                                    },
+                                                    "contenu": {
+                                                        "type": "string",
+                                                        "description": "HTML b64"
+                                                    },
+                                                    "dateCreation": {
+                                                        "type": "string",
+                                                        "example": "01/03/2024"
+                                                    },
+                                                    "dateDebut": {
+                                                        "type": "string",
+                                                        "example": "05/03/2024"
+                                                    },
+                                                    "dateFin": {
+                                                        "type": "string",
+                                                        "example": "06/03/2024"
+                                                    },
+                                                    "cible": {
+                                                        "type": "array",
+                                                        "example": []
+                                                    },
+                                                    "ciblesEtab": {
+                                                        "type": "array",
+                                                        "example": []
+                                                    },
+                                                    "auteur": {
+                                                        "type": "object",
+                                                        "description": "Infos auteur",
+                                                        "properties": {
+                                                            "civilite": {
+                                                                "type": "string",
+                                                                "example": "M."
+                                                            },
+                                                            "prenom": {
+                                                                "type": "string",
+                                                                "example": "Mathias"
+                                                            },
+                                                            "particule": {
+                                                                "type": "string",
+                                                                "example": ""
+                                                            },
+                                                            "nom": {
+                                                                "type": "string",
+                                                                "example": "Doiron"
+                                                            },
+                                                            "type": {
+                                                                "type": "string",
+                                                                "example": "A"
+                                                            },
+                                                            "id": {
+                                                                "type": "string",
+                                                                "example": "1685"
+                                                            }
+                                                        }
                                                     }
                                                 }
                                             }
